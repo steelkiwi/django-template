@@ -20,25 +20,11 @@ django_settings: "config.settings"
 {% endraw %}
 
 # Services
-{% if cookiecutter.use_mysql == "y" -%}
-mysql: true
-{%- endif %}
-{% if cookiecutter.use_apache == "y" -%}
-apache: true
-{%- endif %}
-{% if cookiecutter.use_nginx == "y" -%}
-nginx: true
-{%- endif %}
-{% if cookiecutter.use_postgresql == "y" -%}
-postgresql: true
-{%- endif %}
-{% if cookiecutter.use_rabbitmq == "y" -%}
-rabbitmq: true
-{%- endif %}
-{% if cookiecutter.use_redis == "y" -%}
-redis: true
-{%- endif %}
-{% if cookiecutter.use_supervisor == "y" -%}
-supervisor: true
-{%- endif %}
+mysql: {% if cookiecutter.use_mysql == "y" -%}true{% else %}no{%- endif %}
+apache: {% if cookiecutter.use_apache == "y" -%}true{% else %}no{%- endif %}
+nginx: {% if cookiecutter.use_nginx == "y" -%}true{% else %}no{%- endif %}
+postgresql: {% if cookiecutter.use_postgresql == "y" -%}true{% else %}no{%- endif %}
+rabbitmq: {% if cookiecutter.use_rabbitmq == "y" -%}true{% else %}no{%- endif %}
+redis: {% if cookiecutter.use_redis == "y" -%}true{% else %}no{%- endif %}
+supervisor: {% if cookiecutter.use_supervisor == "y" -%}true{% else %}no{%- endif %}
 app: true
