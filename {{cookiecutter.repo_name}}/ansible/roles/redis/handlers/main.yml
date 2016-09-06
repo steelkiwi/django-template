@@ -1,0 +1,6 @@
+---
+{% raw %}
+- name: Restart Redis
+  sudo: yes
+  service: name=redis-server state=restarted
+{% endraw %}

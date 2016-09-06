@@ -1,0 +1,16 @@
+---
+{% raw %}
+# Database settings.
+db_user: "vagrant"
+db_name: "{{ application_name }}"
+db_password: ""
+
+
+# Application settings.
+virtualenv_path: "/home/vagrant/.env"
+project_path: "/vagrant"
+requirements_file: "{{ project_path }}/requirements/local.txt"
+django_settings_path: "{{ project_path }}/config/settings"
+django_settings: "config.settings.local"
+
+{% endraw %}

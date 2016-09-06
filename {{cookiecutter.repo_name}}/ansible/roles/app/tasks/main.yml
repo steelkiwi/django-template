@@ -1,0 +1,11 @@
+---
+{% raw %}
+- include: setup_virtualenv.yml
+  tags: virtualenv
+
+- include: setup_django_app.yml
+  vars:
+    run_django_db_migrations: yes
+    run_django_filldb: yes
+  tags: deploy
+{% endraw %}

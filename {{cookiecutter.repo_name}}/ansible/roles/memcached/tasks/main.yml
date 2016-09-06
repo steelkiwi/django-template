@@ -1,0 +1,12 @@
+---
+{% raw %}
+- name: Install Memcached
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=installed
+  with_items:
+    - memcached
+  tags: packages
+
+- name: Ensure memcached server is running
+  sudo: yes
+  action: service name=memcached state=started
+{% endraw %}

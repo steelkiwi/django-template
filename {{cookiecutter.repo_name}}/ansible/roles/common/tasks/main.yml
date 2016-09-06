@@ -1,0 +1,48 @@
+---
+{% raw %}
+- name: Update Common Cache
+  apt: update_cache=yes
+
+- name: Ensure bash, OpenSSl, and libssl are the latest versions
+  apt: name={{ item }} state=latest
+  with_items:
+    - bash
+    - openssl
+    - libssl-dev
+    - libssl-doc
+  tags: packages
+
+- name: Install base packages
+  apt: name={{ item }} force=yes state=installed
+  with_items:
+    - git
+    - build-essential
+    - postgresql-server-dev-all
+    - libpq-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - libevent-dev
+    - libxslt-dev
+    - libffi-dev
+    - htop
+    - graphviz-dev
+    - python-dev
+    - python-pip
+    - python-pycurl
+    - python-virtualenv
+  tags: packages
+
+- name: Install Pillow dependency
+  apt: name={{ item }} force=yes state=installed
+  with_items:
+    - libtiff4-dev
+    - libjpeg8-dev
+    - zlib1g-dev
+    - libfreetype6-dev
+    - liblcms2-dev
+    - libwebp-dev
+    - tcl8.5-dev
+    - tk8.5-dev
+    - python-tk
+  tags: packages
+{% endraw %}

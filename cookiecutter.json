@@ -1,0 +1,20 @@
+{
+    "project_name": "project_name",
+    "repo_name": "{{ cookiecutter.project_name|replace(' ', '_') }}",
+    "author_name": "Your Name",
+    "email": "Your email",
+    "description": "A short description of the project.",
+    "domain_name": "example.com",
+    "version": "0.1.0",
+    "timezone": "UTC",
+    "year": "2016",
+    "now": "2016/05/11",
+    "use_celery": "n",
+    "use_redis": "n",
+    "use_allauth": "n",
+    "use_custom_user_model": "n",
+    "use_postgis": "n",
+    "use_rabbit": "n",
+    "use_memcached": "n",
+    "use_python2": "y"
+}

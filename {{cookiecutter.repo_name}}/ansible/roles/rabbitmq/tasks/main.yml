@@ -1,0 +1,12 @@
+---
+{% raw %}
+- name: Install RabbitMQ
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=installed
+  with_items:
+    - rabbitmq-server
+  tags: packages
+
+- name: Ensure RabbitMQ server is running
+  sudo: yes
+  action: service name=rabbitmq-server state=started
+{% endraw %}

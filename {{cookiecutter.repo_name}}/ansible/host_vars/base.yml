@@ -1,0 +1,4 @@
+---
+
+project_name: {{cookiecutter.repo_name}}
+application_name: {{cookiecutter.repo_name}}

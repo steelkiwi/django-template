@@ -1,0 +1,30 @@
+---
+- name: Create a {{cookiecutter.repo_name}} virtual machine via vagrant
+{% raw %}
+  hosts: all
+  become: yes
+  become_user: root
+  remote_user: vagrant
+  vars:
+    - update_apt_cache: yes
+  vars_files:
+    - host_vars/base.yml
+    - host_vars/vagrant.yml
+{% endraw %}
+  roles:
+    - common
+    - postgresql
+    {% if cookiecutter.use_postgis == "y" -%}
+    - postgis
+    {%- endif %}
+    {% if cookiecutter.use_redis == "y" -%}
+    - redis
+    {%- endif %}
+    {% if cookiecutter.use_rabbit == "y" or cookiecutter.use_celery == "y"  -%}
+    - rabbitmq
+    {%- endif %}
+    {% if cookiecutter.use_memcached == "y" -%}
+    - memcached
+    {%- endif %}
+    - bower
+    - app

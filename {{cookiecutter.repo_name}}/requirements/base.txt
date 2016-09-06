@@ -1,0 +1,46 @@
+# Bleeding edge Django
+django==1.8.5
+
+# Configuration
+django-environ==0.4.0
+django-secure==1.0.1
+
+
+# Forms
+django-braces==1.8.1
+django-crispy-forms==1.6.0
+
+# Models
+django-model-utils==2.3.1
+
+# Images
+Pillow==3.0.0
+
+{%- if cookiecutter.use_allauth == 'y' -%}
+# For user registration, either via email or social
+# Well-built with regular release cycles!
+django-allauth==0.23.0
+{%- endif %}
+
+# Python-PostgreSQL Database Adapter
+psycopg2==2.6.1
+
+# Unicode slugification
+unicode-slugify==0.1.3
+django-autoslug==1.9.3
+
+# Time zones support
+pytz==2015.6
+
+{%- if cookiecutter.use_redis == "y" -%}
+# Redis support
+django-redis==4.2.0
+redis>=2.10.0
+{%- endif %}
+
+
+{%- if cookiecutter.use_celery == "y" %}
+celery==3.1.18
+{%- endif %}
+
+# Your custom requirements go here
