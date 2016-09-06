@@ -1,9 +1,9 @@
 ---
 
-- name: enable rabbitmq
+- name: enable apache
   service: >
-    name=rabbitmq-server
+    name=apache2
     enabled=yes
     runlevel=default
     state=started
-  tags: rabbitmq
+  tags: apache2

@@ -1,6 +1,0 @@
----
-{% raw %}
-- name: Restart RabbitMQ
-  sudo: yes
-  service: name=rabbitmq-server state=restarted
-{% endraw %}

@@ -1,0 +1,44 @@
+---
+project_name: {{cookiecutter.repo_name}}
+application_name: {{cookiecutter.repo_name}}
+
+{% raw %}
+# Database settings.
+db_user: "vagrant"
+db_name: "{{ application_name }}"
+db_password: ""
+
+#Python version - change if you needed
+python_version: 2
+
+# Application settings.
+virtualenv_path: "/home/vagrant/venv"
+project_path: "/vagrant"
+requirements_file: "{{ project_path }}/requirements/local.txt"
+django_settings_path: "{{ project_path }}/config"
+django_settings: "config.settings"
+{% endraw %}
+
+# Services
+{% if cookiecutter.use_mysql == "y" -%}
+mysql: true
+{%- endif %}
+{% if cookiecutter.use_apache == "y" -%}
+apache: true
+{%- endif %}
+{% if cookiecutter.use_nginx == "y" -%}
+nginx: true
+{%- endif %}
+{% if cookiecutter.use_postgresql == "y" -%}
+postgresql: true
+{%- endif %}
+{% if cookiecutter.use_rabbitmq == "y" -%}
+rabbitmq: true
+{%- endif %}
+{% if cookiecutter.use_redis == "y" -%}
+redis: true
+{%- endif %}
+{% if cookiecutter.use_supervisor == "y" -%}
+supervisor: true
+{%- endif %}
+app: true

@@ -1,19 +1,12 @@
 ---
 {% raw %}
-- name: Create the virtualenv
-  become: no
-  command: virtualenv {{ virtualenv_path }} --no-site-packages
-           creates={{ virtualenv_path }}/bin/activate
-
-- name: Add activation virtual env to .bashrc
-  become: no
-  shell: echo "source {{ virtualenv_path }}/bin/activate" >> .bashrc
-
-- name: Update pip
-  become: no
-  pip: virtualenv={{ virtualenv_path }} name=pip state=latest
-
-- name: Update setuptools
-  become: no
-  pip: virtualenv={{ virtualenv_path }} name=setuptools state=latest
+- name: Create python virtual environment
+  pip: >
+    name={{ item }}
+    virtualenv="{{ virtualenv_path }}"
+    virtualenv_python="/usr/local/bin/python{{ python_version }}"
+    state=latest
+  with_items:
+    - pip
+    - setuptools
 {% endraw %}

@@ -1,6 +1,6 @@
 ---
-- name: Create a {{cookiecutter.repo_name}} virtual machine via vagrant
-{% raw %}
+- name: Configure box
+
   hosts: all
   become: yes
   become_user: root
@@ -8,23 +8,15 @@
   vars:
     - update_apt_cache: yes
   vars_files:
-    - host_vars/base.yml
-    - host_vars/vagrant.yml
-{% endraw %}
+    - vars/vagrant.yml
+
   roles:
-    - common
-    - postgresql
-    {% if cookiecutter.use_postgis == "y" -%}
-    - postgis
-    {%- endif %}
-    {% if cookiecutter.use_redis == "y" -%}
-    - redis
-    {%- endif %}
-    {% if cookiecutter.use_rabbit == "y" or cookiecutter.use_celery == "y"  -%}
-    - rabbitmq
-    {%- endif %}
-    {% if cookiecutter.use_memcached == "y" -%}
-    - memcached
-    {%- endif %}
-    - bower
-    - app
+    - { role: mysql, when: "mysql == true" }
+    - { role: apache, when: "apache == true" }
+    - { role: nginx, when: "nginx == true" }
+    - { role: postgresql, when: "postgresql == true" }
+    - { role: rabbitmq, when: "rabbitmq == true" }
+    - { role: redis, when: "redis == true" }
+    - { role: supervisor, when: "supervisor == true" }
+    - { role: app, when: "app == true" }
+

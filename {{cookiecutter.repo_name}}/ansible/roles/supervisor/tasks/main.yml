@@ -1,9 +1,9 @@
 ---
 
-- name: enable rabbitmq
+- name: enable supervisor
   service: >
-    name=rabbitmq-server
+    name=supervisor
     enabled=yes
     runlevel=default
     state=started
-  tags: rabbitmq
+  tags: supervisor

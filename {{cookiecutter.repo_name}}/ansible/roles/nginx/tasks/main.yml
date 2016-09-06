@@ -1,9 +1,9 @@
 ---
 
-- name: enable rabbitmq
+- name: enable nginx
   service: >
-    name=rabbitmq-server
+    name=nginx
     enabled=yes
     runlevel=default
     state=started
-  tags: rabbitmq
+  tags: nginx

@@ -1,6 +1,0 @@
----
-{% raw %}
-- name: Restart Memcached
-  sudo: yes
-  service: name=memcached state=restarted
-{% endraw %}
