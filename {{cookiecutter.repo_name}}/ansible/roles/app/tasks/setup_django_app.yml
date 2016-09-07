@@ -15,26 +15,4 @@
   become: yes
   become_user: vagrant
   tags: django.migrate
-
-# ToDo if add django bower
-#- name: Run Django bower install
-#  become: no
-#  django_manage:
-#    command: bower install
-#    app_path: "{{ project_path }}"
-#    virtualenv: "{{ virtualenv_path }}"
-#    settings: "{{ django_settings }}"
-#  tags: django.bower
-
-# ToDo if add fill db
-#- name: Run Django filldb
-#  become: no
-#  django_manage:
-#    command: filldb
-#    app_path: "{{ project_path }}"
-#    virtualenv: "{{ virtualenv_path }}"
-#    settings: "{{ django_settings }}"
-#  when: run_django_filldb is defined and run_django_filldb
-#  tags: django.filldb
-
 {% endraw %}

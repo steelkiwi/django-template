@@ -9,4 +9,6 @@
   with_items:
     - pip
     - setuptools
+  become: yes
+  become_user: vagrant
 {% endraw %}

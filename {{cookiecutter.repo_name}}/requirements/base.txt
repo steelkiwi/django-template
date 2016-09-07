@@ -1,21 +1,18 @@
-django==1.8.5
-django-environ==0.4.0
-django-secure==1.0.1
-django-braces==1.8.1
-django-model-utils==2.3.1
-Pillow==3.0.0
-{%- if cookiecutter.use_allauth == 'y' %}
-django-allauth==0.23.0
+{%- if cookiecutter.use_celery == "y" -%}
+celery==3.1.23
 {%- endif %}
-psycopg2==2.6.1
-unicode-slugify==0.1.3
-django-autoslug==1.9.3
-pytz==2015.6
+Django==1.10.1
+{%- if cookiecutter.use_allauth == 'y' %}
+django-allauth==0.27.0
+{%- endif %}
+django-braces==1.9.0
+django-environ==0.4.0
+django-extensions==1.7.4
+django-model-utils==2.5.2
+Pillow==3.3.1
+psycopg2==2.6.2
+pytz==2016.6.1
+raven==5.26.0
 {%- if cookiecutter.use_redis == "y" %}
-django-redis==4.2.0
 redis>=2.10.0
 {%- endif %}
-{%- if cookiecutter.use_celery == "y" %}
-celery==3.1.18
-{%- endif %}
-raven==5.26.0

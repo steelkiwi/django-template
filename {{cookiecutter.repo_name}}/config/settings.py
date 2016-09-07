@@ -35,6 +35,7 @@ env = environ.Env(
     DJANGO_CELERY_ALWAYS_EAGER=(bool, False),
     {% endif %}
     DJANGO_USE_DEBUG_TOOLBAR=(bool, False),
+    DJANGO_TEST_RUN=(bool, False),
 )
 
 environ.Env.read_env()
@@ -76,6 +77,7 @@ DJANGO_APPS = (
 )
 
 THIRD_PARTY_APPS = (
+    'django_extensions',
     {% if cookiecutter.use_redis != "y" and cookiecutter.use_rabbitmq != "y" and cookiecutter.use_celery == "y" -%}
     'kombu.transport.django'
     {%- endif %}
@@ -168,6 +170,23 @@ CELERY_BACKEND = env('DJANGO_CELERY_BACKEND')
 CELERY_ALWAYS_EAGER = env.bool('DJANGO_CELERY_ALWAYS_EAGER')
 {%- endif %}
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    {% if cookiecutter.use_allauth == 'y' -%}
+    'allauth.account.auth_backends.AuthenticationBackend',
+    {%- endif %}
+)
+{% if cookiecutter.use_allauth == 'y' %}
+INSTALLED_APPS += (
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+)
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+{%- endif %}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -227,3 +246,6 @@ if env.bool('DJANGO_USE_DEBUG_TOOLBAR'):
         ],
         'SHOW_TEMPLATE_CONTEXT': True,
     }
+
+if env.bool('DJANGO_TEST_RUN'):
+    pass
