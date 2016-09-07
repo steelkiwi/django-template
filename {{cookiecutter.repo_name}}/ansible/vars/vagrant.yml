@@ -23,7 +23,7 @@ python_version: {{ cookiecutter.python_version }}
 mysql: {% if cookiecutter.use_mysql == "y" -%}true{% else %}no{%- endif %}
 apache: {% if cookiecutter.use_apache == "y" -%}true{% else %}no{%- endif %}
 nginx: {% if cookiecutter.use_nginx == "y" -%}true{% else %}no{%- endif %}
-postgresql: {% if cookiecutter.use_postgresql == "y" -%}true{% else %}no{%- endif %}
+postgresql: {% if cookiecutter.use_postgresql == "y" or cookiecutter.use_postgis == "y" -%}true{% else %}no{%- endif %}
 rabbitmq: {% if cookiecutter.use_rabbitmq == "y" -%}true{% else %}no{%- endif %}
 redis: {% if cookiecutter.use_redis == "y" -%}true{% else %}no{%- endif %}
 supervisor: {% if cookiecutter.use_supervisor == "y" -%}true{% else %}no{%- endif %}

@@ -12,6 +12,8 @@
     virtualenv="{{ virtualenv_path }}"
     settings="{{ django_settings }}"
   when: run_django_db_migrations is defined and run_django_db_migrations
+  become: yes
+  become_user: vagrant
   tags: django.migrate
 
 # ToDo if add django bower

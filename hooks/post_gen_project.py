@@ -3,7 +3,6 @@ Does the following:
 
 1. Generates and saves random secret key
 2. Removes the taskapp if celery isn't going to be used
-3. Copy files from /docs/ to {{ cookiecutter.repo_name }}/docs/
 
     TODO: this might have to be moved to a pre_gen_hook
 
@@ -74,14 +73,13 @@ def set_secret_key(setting_file_location):
 
 def make_secret_key(project_directory):
     """Generates and saves random secret key"""
-    # Determine the local_setting_file_location
-    local_setting = os.path.join(
+    # Determine the setting_file_location
+    setting = os.path.join(
         project_directory,
-        'config/settings/local.py'
+        'config/settings.py'
     )
 
-    # local.py settings file
-    set_secret_key(local_setting)
+    set_secret_key(setting)
 
     env_file = os.path.join(
         project_directory,
@@ -90,7 +88,6 @@ def make_secret_key(project_directory):
 
     # env.example file
     set_secret_key(env_file)
-
 
 
 def remove_task_app(project_directory):
@@ -102,61 +99,9 @@ def remove_task_app(project_directory):
     )
     shutil.rmtree(task_app_location)
 
-# IN PROGRESS
-# def copy_doc_files(project_directory):
-#     cookiecutters_dir = DEFAULT_CONFIG['cookiecutters_dir']
-#     cookiecutter_django_dir = os.path.join(
-#         cookiecutters_dir,
-#         'cookiecutter-django',
-#         'docs'
-#     )
-#     target_dir = os.path.join(
-#         project_directory,
-#         'docs'
-#     )
-#     for name in os.listdir(cookiecutter_django_dir):
-#         if name.endswith('.rst') and not name.startswith('index'):
-#             src = os.path.join(cookiecutter_django_dir, name)
-#             dst = os.path.join(target_dir, name)
-#             shutil.copyfile(src, dst)
-
 # 1. Generates and saves random secret key
 make_secret_key(PROJECT_DIRECTORY)
 
 # 2. Removes the taskapp if celery isn't going to be used
 if '{{ cookiecutter.use_celery }}'.lower() == 'n':
     remove_task_app(PROJECT_DIRECTORY)
-
-# 3. Copy files from /docs/ to {{ cookiecutter.repo_name }}/docs/
-# copy_doc_files(PROJECT_DIRECTORY)
-
-def remove_user_app(project_directory):
-    """Removes the user app an templates if custom user model isn't going to be used"""
-    # Determine the local_setting_file_location
-    user_app_location = os.path.join(
-        PROJECT_DIRECTORY,
-        '{{ cookiecutter.repo_name }}/users'
-    )
-    shutil.rmtree(user_app_location)
-
-    user_templates_location = os.path.join(
-        PROJECT_DIRECTORY,
-        '{{ cookiecutter.repo_name }}/templates/users'
-    )
-    shutil.rmtree(user_templates_location)
-
-if '{{ cookiecutter.use_custom_user_model }}'.lower() == 'n':
-    remove_user_app(PROJECT_DIRECTORY)
-
-def remove_allauth_tpl(project_directory):
-    """Removes the allauth templates if alauth isn't going to be used"""
-    # Determine the local_setting_file_location
-
-    user_templates_location = os.path.join(
-        PROJECT_DIRECTORY,
-        '{{ cookiecutter.repo_name }}/templates/account'
-    )
-    shutil.rmtree(user_templates_location)
-
-if '{{ cookiecutter.use_allauth }}'.lower() == 'n':
-    remove_allauth_tpl(PROJECT_DIRECTORY)

@@ -2,17 +2,14 @@
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name|replace(' ', '_') }}",
     "python_version": ["2", "3"],
-    
-    "use_celery": "n",
-    "use_allauth": "n",
-    "use_custom_user_model": "n",
-
     "use_postgresql": "n",
     "use_postgis": "n",
+    "use_mysql": "n",
+    "use_celery": "n",
+    "use_allauth": "n",
     "use_redis": "n",
     "use_rabbitmq": "n",
     "use_supervisor": "n",
-    "use_mysql": "n",
     "use_apache": "n",
     "use_nginx": "n"
 }
