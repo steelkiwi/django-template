@@ -1,13 +1,12 @@
-Установка зависимостей
-======================
-Для установки проекта вам понадобится Vagrant, VirtualBox, cookiecutter, git.
-Проверьте установлены ли данные компоненты.
-Если нет то установите их.
+Dependences installation
+========================
+For project installation you need Vagrant, VirtualBox, cookiecutter, git.
+Check whether these components are installed.
+If these components have not installed, please install them.
 
-Установка VirtalBox
-===================
-Скачайте последнюю версию с сайта Virtualbox https://www.virtualbox.org/wiki/Downloads
-Или воспользуйтесь пакетным менеджером
+VirtalBox installation
+======================
+Download the latest version from the website Virtualbox https://www.virtualbox.org/wiki/Downloads or use the package manager
 
 ### Linux:
 
@@ -19,17 +18,19 @@
 
 * ``$ brew cask install virtualbox``
 
-Установка Vagrant
-=================
+Vagrant installation
+====================
 
 ### Linux:
 
-Не пытайтесь устанавливать vagrant из официальных репозиториев ОС (либо сравните версию доступную в репо с версией указанной на официальном сайте) https://www.vagrantup.com/downloads.html
+Don't try install vagrant from official OS repositories (or compare the version available in a repo to the version specified on the official site) https://www.vagrantup.com/downloads.html
+
+Then install nfs-utils
 
 * ``$ sudo apt-get update``
 * ``$ sudo apt-get install nfs-utils nfs-utils-lib``
 
-Если последнее не работает
+If the last doesn't work use these commands
 
 * ``$ sudo apt-get install nfs-kernel-server``
 * ``$ sudo apt-get install nfs-common``
@@ -37,23 +38,23 @@
 
 ### Mac OS:
 
-Скачайте последнюю версию с сайт Vagrant: https://www.vagrantup.com/downloads.html
+Download the latest version from Vagran official website: https://www.vagrantup.com/downloads.html
 
-Или установите с помощью homebrew и cask:
+Or install by means of homebrew and cask:
 
 * ``$ brew cask install vagrant``
 
-### Установка cookiecutter
+### Сookiecutter installation
 
 * ``$ sudo pip install -U cookiecutter``
 
-### Установка ansible
+### Ansible installation
 
 * ``pip install --upgrade paramiko PyYAML Jinja2 httplib2 six ansible==2.0.1.0``
 
-### Установка Git
+### Git installation
 
-Следуйте инструкциям на https://git-scm.com/book/en/v1/Getting-Started-Installing-Git
+Use instruction from https://git-scm.com/book/en/v1/Getting-Started-Installing-Git
 
 ### Linux:
 
@@ -63,20 +64,18 @@
 
 * ``$ brew install git``
 
-### Установка проекта, настройка, конфигурация
+### Prject set up, configuration
 
-Загрузка шаблонного проекта
-Для загрузки шаблонного проекта используем cookiecutter, выполните следующую команду:
+### Project template installation
+For project installation we use cookiecutter. Execute the following command:
 
 * ``$ cookiecutter https://github.com/steelkiwi/django-template.git``
 
-Далее следуйте инструкциям в командной строке.
+Then follow instructions from command line.
 
-Шаблон включает в себя в том числе конфигурацию ansible, выберите необходимые для проекта роли.
+The template includes ansible configuration, choose roles, necessary for the project.
 
-### Запуск проекта
-
-Для запуска проекта выполните команды:
+### Start project
 
 * ``$ vagrant up``
 * ``$ vagrant ssh``
@@ -84,11 +83,7 @@
 * ``$ cp env.example ./config/.env``
 * ``$ python manage.py runserver 0.0.0.0:8000``
 
-### Инициализация Git
-
-После того как проект был сконфигурирован, нам необходимо инициализавроать git репозиторий, добавить соответствующий удаленный сервер и выполнить первый коммит с загрузкой на удаленный сервер .
-
-Для конфигурации выполните следующие команды:
+### Git inicialisation
 
 * ``$ git init``
 * ``$ git remote add origin {{ repo_url }}``
