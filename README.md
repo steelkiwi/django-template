@@ -68,7 +68,7 @@
 Загрузка шаблонного проекта
 Для загрузки шаблонного проекта используем cookiecutter, выполните следующую команду:
 
-* ``$ cookiecutter git@git.steelkiwi.com:web/django-template.git``
+* ``$ cookiecutter https://github.com/steelkiwi/django-template.git``
 
 Далее следуйте инструкциям в командной строке.
 
