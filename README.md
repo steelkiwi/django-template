@@ -64,9 +64,8 @@ Use instruction from https://git-scm.com/book/en/v1/Getting-Started-Installing-G
 
 * ``$ brew install git``
 
-### Prject set up, configuration
-
 ### Project template installation
+
 For project installation we use cookiecutter. Execute the following command:
 
 * ``$ cookiecutter https://github.com/steelkiwi/django-template.git``
