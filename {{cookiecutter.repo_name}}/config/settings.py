@@ -78,8 +78,13 @@ DJANGO_APPS = (
 
 THIRD_PARTY_APPS = (
     'django_extensions',
-    {% if cookiecutter.use_redis != "y" and cookiecutter.use_rabbitmq != "y" and cookiecutter.use_celery == "y" -%}
-    'kombu.transport.django'
+    {%- if cookiecutter.use_redis != "y" and cookiecutter.use_rabbitmq != "y" and cookiecutter.use_celery == "y" %}
+    'kombu.transport.django',
+    {%- endif %}
+    {% if cookiecutter.use_allauth == 'y' -%}
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     {%- endif %}
 )
 
@@ -177,11 +182,6 @@ AUTHENTICATION_BACKENDS = (
     {%- endif %}
 )
 {% if cookiecutter.use_allauth == 'y' %}
-INSTALLED_APPS += (
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-)
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
