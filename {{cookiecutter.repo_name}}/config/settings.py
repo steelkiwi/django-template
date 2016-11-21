@@ -190,7 +190,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 {%- endif %}
 
-{% if cookiecutter.use_robots == 'y' %}
+{%- if cookiecutter.use_robots == 'y' %}
 # Django-Robots
 ROBOTS_USE_HOST = False
 ROBOTS_USE_SITEMAP = False
