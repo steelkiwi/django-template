@@ -86,7 +86,7 @@ THIRD_PARTY_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     {%- endif %}
-    {% if cookiecutter.use_robots == "y" -%}
+    {%- if cookiecutter.use_robots == "y" %}
     'robots',
     {%- endif %}
 )
