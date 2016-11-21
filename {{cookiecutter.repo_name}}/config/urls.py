@@ -16,6 +16,9 @@ urlpatterns = [
     {%- if cookiecutter.use_allauth == 'y' %}
     url(r'^accounts/', include('allauth.urls')),
     {%- endif %}
+    {%- if cookiecutter.use_robots == 'y' %}
+    url(r'^robots\.txt', include('robots.urls')),
+    {%- endif %}
     # Your stuff: custom urls includes go here
 ]
 
