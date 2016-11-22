@@ -86,6 +86,9 @@ THIRD_PARTY_APPS = (
     'allauth.account',
     'allauth.socialaccount',
     {%- endif %}
+    {%- if cookiecutter.use_robots == "y" %}
+    'robots',
+    {%- endif %}
 )
 
 LOCAL_APPS = (
@@ -185,6 +188,14 @@ AUTHENTICATION_BACKENDS = (
 ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+{%- endif %}
+
+{%- if cookiecutter.use_robots == 'y' %}
+# Django-Robots
+ROBOTS_USE_HOST = False
+ROBOTS_USE_SITEMAP = False
+# cache is not updated if anything was changed
+# ROBOTS_CACHE_TIMEOUT = 60*60*24  # 24 hours
 {%- endif %}
 
 LOGGING = {

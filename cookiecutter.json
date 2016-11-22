@@ -11,5 +11,6 @@
     "use_rabbitmq": "n",
     "use_supervisor": "n",
     "use_apache": "n",
-    "use_nginx": "n"
+    "use_nginx": "n",
+    "use_robots": "n"
 }

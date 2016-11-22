@@ -1,0 +1,24 @@
+[
+{
+    "model": "robots.rule",
+    "pk": 1,
+    "fields": {
+        "robot": "*",
+        "crawl_delay": null,
+        "allowed": [],
+        "disallowed": [
+            1
+        ],
+        "sites": [
+            1
+        ]
+    }
+},
+{
+    "model": "robots.url",
+    "pk": 1,
+    "fields": {
+        "pattern": "/"
+    }
+}
+]
