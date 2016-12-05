@@ -89,12 +89,16 @@ THIRD_PARTY_APPS = (
     {%- if cookiecutter.use_robots == "y" %}
     'robots',
     {%- endif %}
+    {%- if cookiecutter.use_seo == 'y' %}
     'solo',
+    {%- endif %}
 )
 
 LOCAL_APPS = (
     '{{ cookiecutter.repo_name }}.users',
+    {%- if cookiecutter.use_seo == 'y' %}
     '{{ cookiecutter.repo_name }}.seo',
+    {%- endif %}
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -148,6 +152,9 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
                 'django.contrib.messages.context_processors.messages',
+                {%- if cookiecutter.use_seo == 'y' %}
+                '{{ cookiecutter.repo_name }}.seo.context_processors.get_page_meta_data',
+                {%- endif %}
             ],
         },
     },
@@ -251,19 +258,31 @@ if os.environ.get('SENTRY_DSN'):
     }
 
 if env.bool('DJANGO_USE_DEBUG_TOOLBAR'):
-    MIDDLEWARE_CLASSES += ('debug_toolbar.middleware.DebugToolbarMiddleware', )
-    INSTALLED_APPS += ('debug_toolbar', )
+    MIDDLEWARE_CLASSES += (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
+    INSTALLED_APPS += (
+        'debug_toolbar',
+    )
     DEBUG_TOOLBAR_CONFIG = {
         'DISABLE_PANELS': [
             'debug_toolbar.panels.redirects.RedirectsPanel',
         ],
         'SHOW_TEMPLATE_CONTEXT': True,
+        'SHOW_TOOLBAR_CALLBACK': lambda request: True,
     }
+
+    DEBUG_TOOLBAR_PATCH_SETTINGS = False
+
+    # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html
+    INTERNAL_IPS = ('127.0.0.1', '0.0.0.0', '10.0.2.2')
 
 if env.bool('DJANGO_TEST_RUN'):
     pass
 
+{%- if cookiecutter.use_seo == 'y' %}
 SOLO_CACHE = 'default'
 SOLO_CACHE_TIMEOUT = 60*60*24  # 1 day
 SOLO_CACHE_PREFIX = 'solo'
 PAGE_META_DATA_CACHE_TIMEOUT = 60*60*12  # 12 hours
+{%- endif %}

@@ -12,5 +12,6 @@
     "use_supervisor": "n",
     "use_apache": "n",
     "use_nginx": "n",
-    "use_robots": "n"
+    "use_robots": "n",
+    "use_seo": "n"
 }

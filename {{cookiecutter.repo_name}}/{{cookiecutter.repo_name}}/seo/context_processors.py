@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+import warnings
 
-from django.conf import settings
+from django.utils.translation import ugettext as _
 from .models import DefaultPageMetaData, PageMetaData
 
 
@@ -15,7 +17,7 @@ def get_page_meta_data(request):
     if url_name:
         try:
             # TODO cache result here
-            page_meta_data = PageMetaData.objects.get(url=request.path)
+            page_meta_data = PageMetaData.get_metadata(url=request.path)
             return {
                 'meta_keywords': page_meta_data.meta_keywords,
                 'meta_description': page_meta_data.meta_description
@@ -28,10 +30,12 @@ def get_default_page_meta_data():
     default_page_meta_data = DefaultPageMetaData.get_solo()
     if not default_page_meta_data.meta_keywords:
         # TODO log here
-        print('Default meta keywords are missed')
+        message = _('Default meta keywords are missed')
+        warnings.warn(message)
     if not default_page_meta_data.meta_description:
         # TODO log here
-        print('Default meta description is missed')
+        message = _('Default meta description is missed')
+        warnings.warn(message)
     return {
         'meta_keywords': default_page_meta_data.meta_keywords,
         'meta_description': default_page_meta_data.meta_description
