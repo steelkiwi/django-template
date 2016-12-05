@@ -89,10 +89,12 @@ THIRD_PARTY_APPS = (
     {%- if cookiecutter.use_robots == "y" %}
     'robots',
     {%- endif %}
+    'solo',
 )
 
 LOCAL_APPS = (
     '{{ cookiecutter.repo_name }}.users',
+    '{{ cookiecutter.repo_name }}.seo',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
