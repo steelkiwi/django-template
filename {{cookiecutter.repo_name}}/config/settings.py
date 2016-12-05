@@ -260,3 +260,8 @@ if env.bool('DJANGO_USE_DEBUG_TOOLBAR'):
 
 if env.bool('DJANGO_TEST_RUN'):
     pass
+
+SOLO_CACHE = 'default'
+SOLO_CACHE_TIMEOUT = 60*60*24  # 1 day
+SOLO_CACHE_PREFIX = 'solo'
+PAGE_META_DATA_CACHE_TIMEOUT = 60*60*12  # 12 hours

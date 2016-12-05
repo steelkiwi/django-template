@@ -20,3 +20,4 @@ django-redis-cache==1.7.1
 {%- if cookiecutter.use_robots == "y" %}
 django-robots==2.0
 {%- endif %}
+django-solo==1.1.2
