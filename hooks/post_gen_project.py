@@ -99,9 +99,22 @@ def remove_task_app(project_directory):
     )
     shutil.rmtree(task_app_location)
 
+def remove_seo(project_directory):
+    """Removes the seo if seo isn't going to be used"""
+    # Determine the local_setting_file_location
+    task_app_location = os.path.join(
+        PROJECT_DIRECTORY,
+        '{{ cookiecutter.repo_name }}/seo'
+    )
+    shutil.rmtree(task_app_location)
+
 # 1. Generates and saves random secret key
 make_secret_key(PROJECT_DIRECTORY)
 
 # 2. Removes the taskapp if celery isn't going to be used
 if '{{ cookiecutter.use_celery }}'.lower() == 'n':
     remove_task_app(PROJECT_DIRECTORY)
+
+# 3. Removes the seo if seo isn't going to be used
+if '{{ cookiecutter.use_seo }}'.lower() == 'n':
+    remove_seo(PROJECT_DIRECTORY)
