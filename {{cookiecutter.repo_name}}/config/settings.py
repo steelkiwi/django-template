@@ -280,6 +280,7 @@ if env.bool('DJANGO_USE_DEBUG_TOOLBAR'):
 if env.bool('DJANGO_TEST_RUN'):
     pass
 
+
 {%- if cookiecutter.use_seo == 'y' %}
 SOLO_CACHE = 'default'
 SOLO_CACHE_TIMEOUT = 60*60*24  # 1 day
