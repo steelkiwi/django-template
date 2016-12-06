@@ -83,9 +83,9 @@ class PageMetaData(PageMetaDataMixin):
     def save(self, *args, **kwargs):
         super(PageMetaDataMixin, self).save(*args, **kwargs)
         if self.url:
-            cache_name = PageMetaData.get_cache_name(self.url)
+            cache_name = self.get_cache_name(self.url)
             cache_timeout = getattr(settings, 'PAGE_META_DATA_CACHE_TIMEOUT', 600)
-            cache.set(cache_name, cache_obj, cache_timeout)
+            cache.set(cache_name, self, cache_timeout)
 
 
 @receiver(pre_delete, sender=PageMetaData)
