@@ -6,6 +6,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from django.core.cache import cache
 from django.conf import settings
+from django.db.models.signals import pre_delete 
+from django.dispatch import receiver
 
 from solo.models import SingletonModel
 
@@ -57,13 +59,19 @@ class PageMetaData(PageMetaDataMixin):
         return self.url
 
     @classmethod
+    def get_cache_name(cls, url):
+        cache_name = '{}_{}'.format(cls._meta.object_name.lower(), url.strip().replace(' ', '').replace('/', '_'))
+        return cache_name
+
+    @classmethod
     def get_metadata(cls, url=None):
         if url is None:
             raise cls.DoesNotExist(
                 "%s matching query does not exist." %
                 cls._meta.object_name
             )
-        cache_name = '{}_{}'.format(cls._meta.object_name.lower(), url.strip().replace(' ', '').replace('/', '_'))
+        
+        cache_name = cls.get_cache_name(url)
 
         cache_obj = cache.get(cache_name)
         if not cache_obj:
@@ -71,3 +79,17 @@ class PageMetaData(PageMetaDataMixin):
             cache_obj = cls.objects.get(url=url)
             cache.set(cache_name, cache_obj, cache_timeout)
         return cache_obj
+
+    def save(self, *args, **kwargs):
+        super(PageMetaDataMixin, self).save(*args, **kwargs)
+        if self.url:
+            cache_name = PageMetaData.get_cache_name(self.url)
+            cache_timeout = getattr(settings, 'PAGE_META_DATA_CACHE_TIMEOUT', 600)
+            cache.set(cache_name, cache_obj, cache_timeout)
+
+
+@receiver(pre_delete, sender=PageMetaData)
+def delete_cache(sender, instance, **kwargs):
+    if sender == PageMetaData:
+        cache_name = PageMetaData.get_cache_name(instance.url)
+        cache.delete(cache_name)
