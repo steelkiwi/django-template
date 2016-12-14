@@ -75,9 +75,12 @@ class PageMetaData(PageMetaDataMixin):
 
         cache_obj = cache.get(cache_name)
         if not cache_obj:
-            cache_timeout = getattr(settings, 'PAGE_META_DATA_CACHE_TIMEOUT', 600)
-            cache_obj = cls.objects.get(url=url)
-            cache.set(cache_name, cache_obj, cache_timeout)
+            try:
+                cache_timeout = getattr(settings, 'PAGE_META_DATA_CACHE_TIMEOUT', 600)
+                cache_obj = cls.objects.get(url=url)
+                cache.set(cache_name, cache_obj, cache_timeout)
+            except cls.DoesNotExist:
+                pass
         return cache_obj
 
     def save(self, *args, **kwargs):

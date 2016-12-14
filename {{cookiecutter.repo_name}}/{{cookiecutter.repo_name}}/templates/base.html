@@ -11,10 +11,8 @@
         {%- if cookiecutter.use_seo == 'y' %}
         {% raw %}
         {% block seo %}
-            {% if meta_keywords and meta_description %}
-                <meta name="description" content="{{ meta_description }}">
-                <meta name="keywords" content="{{ meta_keywords }}">
-            {% endif %}
+            {% if meta_description %}<meta name="description" content="{{ meta_description }}">{% endif %}
+            {% if meta_keywords %}<meta name="keywords" content="{{ meta_keywords }}">{% endif %}
         {% endblock seo %}
         {% endraw %}
         {%- endif %}
