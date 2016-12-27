@@ -99,6 +99,7 @@ def remove_task_app(project_directory):
     )
     shutil.rmtree(task_app_location)
 
+
 def remove_seo(project_directory):
     """Removes the seo if seo isn't going to be used"""
     # Determine the local_setting_file_location
@@ -107,6 +108,17 @@ def remove_seo(project_directory):
         '{{ cookiecutter.repo_name }}/seo'
     )
     shutil.rmtree(task_app_location)
+
+
+def remove_fixtures(project_directory):
+    """Removes fixtures if robots aren't going to be used"""
+    # Determine the local_setting_file_location
+    task_app_location = os.path.join(
+        PROJECT_DIRECTORY,
+        'fixtures'
+    )
+    shutil.rmtree(task_app_location)
+
 
 # 1. Generates and saves random secret key
 make_secret_key(PROJECT_DIRECTORY)
@@ -118,3 +130,7 @@ if '{{ cookiecutter.use_celery }}'.lower() == 'n':
 # 3. Removes the seo if seo isn't going to be used
 if '{{ cookiecutter.use_seo }}'.lower() == 'n':
     remove_seo(PROJECT_DIRECTORY)
+
+# 4. Removes fixtures if robots aren't going to be used
+if '{{ cookiecutter.use_robots }}'.lower() == 'n':
+    remove_fixtures(PROJECT_DIRECTORY)
