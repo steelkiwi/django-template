@@ -1,14 +1,18 @@
 ---
 {% raw %}
 - name: Create python virtual environment
+  shell: "virtualenv -p /usr/local/bin/python{{ python_version }} {{ virtualenv_path }}"
+  become: no
+  tags: create_venv
+
+- name: Upgrade pip and setuptools
   pip: >
     name={{ item }}
-    virtualenv="{{ virtualenv_path }}"
-    virtualenv_python="/usr/local/bin/python{{ python_version }}"
+    executable="{{ virtualenv_path }}/bin/pip{{ python_version }}"
     state=latest
   with_items:
     - pip
     - setuptools
-  become: yes
-  become_user: vagrant
+  become: no
+  tags: create_venv
 {% endraw %}

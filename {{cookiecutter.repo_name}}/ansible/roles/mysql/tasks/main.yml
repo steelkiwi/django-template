@@ -6,6 +6,8 @@
     enabled=yes
     runlevel=default
     state=started
+  become: yes
+  become_user: root
   tags: mysql
 
 - name: create user
@@ -16,6 +18,7 @@
     password=''
     priv=*.*:ALL
     state=present
+  become: no
   tags: db
 
 - name: create database
@@ -24,5 +27,6 @@
     login_user={{ db_user }}
     encoding='utf8'
     state=present
+  become: no
   tags: db
 {% endraw %}

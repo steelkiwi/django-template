@@ -6,10 +6,12 @@
     enabled=yes
     runlevel=default
     state=started
+  become: yes
+  become_user: root
   tags: postgresql
 
 - name: Create database
-  postgresql_db: > 
+  postgresql_db: >
     login_user={{ db_user }}
     name={{ db_name }}
     owner={{ db_user }}
@@ -17,7 +19,6 @@
     lc_collate='en_US.UTF-8'
     lc_ctype='en_US.UTF-8'
     state=present
-  become: yes
-  become_user: vagrant
+  become: no
   tags: create_db
 {% endraw %}

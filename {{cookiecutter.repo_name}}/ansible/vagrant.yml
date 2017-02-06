@@ -2,9 +2,6 @@
 - name: Configure box
 
   hosts: all
-  become: yes
-  become_user: root
-  remote_user: vagrant
   vars:
     - update_apt_cache: yes
   vars_files:

@@ -2,8 +2,10 @@
 {% raw %}
 - name: Install packages required by the Django app inside virtualenv
   pip: >
-    virtualenv={{ virtualenv_path }}
     requirements={{ requirements_file }}
+    executable="{{ virtualenv_path }}/bin/pip{{ python_version }}"
+  become: no
+  tags: requirements
 
 - name: Run Django database migrations
   django_manage: >
@@ -12,7 +14,6 @@
     virtualenv="{{ virtualenv_path }}"
     settings="{{ django_settings }}"
   when: run_django_db_migrations is defined and run_django_db_migrations
-  become: yes
-  become_user: vagrant
+  become: no
   tags: django.migrate
 {% endraw %}

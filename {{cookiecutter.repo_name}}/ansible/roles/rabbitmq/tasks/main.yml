@@ -6,4 +6,6 @@
     enabled=yes
     runlevel=default
     state=started
+  become: yes
+  become_user: root
   tags: rabbitmq
