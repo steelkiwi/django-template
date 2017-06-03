@@ -36,6 +36,9 @@ env = environ.Env(
     {% endif %}
     DJANGO_USE_DEBUG_TOOLBAR=(bool, False),
     DJANGO_TEST_RUN=(bool, False),
+
+    DJANGO_HEALTH_CHECK_BODY=(str, 'Success'),
+    DJANGO_USE_SILK=(bool, False),
 )
 
 environ.Env.read_env()
@@ -94,6 +97,11 @@ THIRD_PARTY_APPS = (
     {%- endif %}
 )
 
+if env('DJANGO_USE_SILK'):
+    THIRD_PARTY_APPS += (
+        'silk',
+    )
+
 LOCAL_APPS = (
     '{{ cookiecutter.repo_name }}.users',
     {%- if cookiecutter.use_seo == 'y' %}
@@ -115,6 +123,10 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+if env('DJANGO_USE_SILK'):
+    MIDDLEWARE_CLASSES += (
+        'silk.middleware.SilkyMiddleware',
+    )
 
 EMAIL_URL = env.email_url('DJANGO_EMAIL_URL')
 EMAIL_BACKEND = EMAIL_URL['EMAIL_BACKEND']
@@ -287,3 +299,12 @@ SOLO_CACHE_TIMEOUT = 60*60*24  # 1 day
 SOLO_CACHE_PREFIX = 'solo'
 PAGE_META_DATA_CACHE_TIMEOUT = 60*60*12  # 12 hours
 {%- endif %}
+
+HEALTH_CHECK_BODY = env('DJANGO_HEALTH_CHECK_BODY')
+
+# Silk config
+USE_SILK = env('DJANGO_USE_SILK')
+if USE_SILK:
+    SILKY_AUTHENTICATION = True  # User must login
+    SILKY_AUTHORISATION = True  # User must have permissions
+    SILKY_PERMISSIONS = lambda user: user.is_superuser

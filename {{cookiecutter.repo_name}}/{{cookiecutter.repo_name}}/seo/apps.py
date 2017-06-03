@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class MetadataConfig(AppConfig):
-    name = 'test_seo.seo'
+    name = '{{ cookiecutter.repo_name }}.seo'
