@@ -1,7 +1,7 @@
 {
     "project_name": "project_name",
     "repo_name": "{{ cookiecutter.project_name|replace(' ', '_') }}",
-    "python_version": ["2", "3"],
+    "python_version": ["2", "3.5", "3.6"],
     "use_postgresql": "y",
     "use_postgis": "n",
     "use_mysql": "n",
