@@ -103,9 +103,10 @@ if env('DJANGO_USE_SILK'):
     )
 
 LOCAL_APPS = (
-    '{{ cookiecutter.repo_name }}.users',
+    '{{ cookiecutter.repo_name }}.common.apps.CommonConfig',
+    '{{ cookiecutter.repo_name }}.users.apps.UsersConfig',
     {%- if cookiecutter.use_seo == 'y' %}
-    '{{ cookiecutter.repo_name }}.seo',
+    '{{ cookiecutter.repo_name }}.seo.apps.MetadataConfig',
     {%- endif %}
 )
 
