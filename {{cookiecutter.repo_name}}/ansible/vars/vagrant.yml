@@ -16,7 +16,7 @@ django_settings_path: "{{ project_path }}/config"
 django_settings: "config.settings"
 {% endraw %}
 
-#Python version - change if you needed
+#Python version - change if you needed (2 or 3.5 or 3.6)
 python_version: {{ cookiecutter.python_version }}
 
 # Services

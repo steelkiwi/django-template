@@ -3,7 +3,7 @@
 - name: Install packages required by the Django app inside virtualenv
   pip: >
     requirements={{ requirements_file }}
-    executable="{{ virtualenv_path }}/bin/pip{{ python_version }}"
+    executable="{{ virtualenv_path }}/bin/pip"
   become: no
   tags: requirements
 
