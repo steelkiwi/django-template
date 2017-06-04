@@ -13,6 +13,7 @@ urlpatterns = [
     {% raw %}# Django Admin, use {% url 'admin:index' %}{% endraw %}
     url(settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^users/', include("{{ cookiecutter.repo_name }}.users.urls", namespace="users")),
+    url(r'^common/', include("{{ cookiecutter.repo_name }}.common.urls", namespace="common")),
     {%- if cookiecutter.use_allauth == 'y' %}
     url(r'^accounts/', include('allauth.urls')),
     {%- endif %}
