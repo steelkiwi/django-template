@@ -8,7 +8,7 @@
 - name: Upgrade pip and setuptools
   pip: >
     name={{ item }}
-    executable="{{ virtualenv_path }}/bin/pip{{ python_version }}"
+    executable="{{ virtualenv_path }}/bin/pip"
     state=latest
   with_items:
     - pip

@@ -13,6 +13,7 @@ urlpatterns = [
     {% raw %}# Django Admin, use {% url 'admin:index' %}{% endraw %}
     url(settings.ADMIN_URL, include(admin.site.urls)),
     url(r'^users/', include("{{ cookiecutter.repo_name }}.users.urls", namespace="users")),
+    url(r'^common/', include("{{ cookiecutter.repo_name }}.common.urls", namespace="common")),
     {%- if cookiecutter.use_allauth == 'y' %}
     url(r'^accounts/', include('allauth.urls')),
     {%- endif %}
@@ -21,6 +22,11 @@ urlpatterns = [
     {%- endif %}
     # Your stuff: custom urls includes go here
 ]
+
+if settings.USE_SILK:
+    urlpatterns += [
+        url(r'^silk/', include('silk.urls', namespace='silk'))
+    ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

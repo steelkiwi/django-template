@@ -21,3 +21,4 @@ django-redis-cache==1.7.1
 django-robots==2.0
 {%- endif %}
 django-solo==1.1.2
+django-silk==1.0.0
