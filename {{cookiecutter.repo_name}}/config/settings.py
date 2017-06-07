@@ -110,14 +110,14 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 AUTH_USER_MODEL = 'users.User'
 ADMIN_URL = r'^admin/'
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
+]
 
 EMAIL_URL = env.email_url('DJANGO_EMAIL_URL')
 EMAIL_BACKEND = EMAIL_URL['EMAIL_BACKEND']
@@ -261,9 +261,9 @@ if os.environ.get('SENTRY_DSN'):
     }
 
 if env.bool('DJANGO_USE_DEBUG_TOOLBAR'):
-    MIDDLEWARE_CLASSES += (
+    MIDDLEWARE_CLASSES += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
-    )
+    ]
     INSTALLED_APPS += (
         'debug_toolbar',
     )
@@ -299,9 +299,9 @@ if USE_SILK:
     INSTALLED_APPS += (
         'silk',
     )
-    MIDDLEWARE_CLASSES += (
+    MIDDLEWARE_CLASSES += [
         'silk.middleware.SilkyMiddleware',
-    )
+    ]
     SILKY_AUTHENTICATION = True  # User must login
     SILKY_AUTHORISATION = True  # User must have permissions
     SILKY_PERMISSIONS = lambda user: user.is_superuser
