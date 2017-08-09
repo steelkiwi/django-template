@@ -28,5 +28,11 @@ if settings.USE_SILK:
         url(r'^silk/', include('silk.urls', namespace='silk'))
     ]
 
+if settings.USE_DEBUG_TOOLBAR:
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

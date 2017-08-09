@@ -260,7 +260,8 @@ if os.environ.get('SENTRY_DSN'):
         'release': raven.fetch_git_sha(str(ROOT_DIR)),
     }
 
-if env.bool('DJANGO_USE_DEBUG_TOOLBAR'):
+USE_DEBUG_TOOLBAR = env.bool('DJANGO_USE_DEBUG_TOOLBAR')
+if USE_DEBUG_TOOLBAR:
     MIDDLEWARE_CLASSES += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     ]
