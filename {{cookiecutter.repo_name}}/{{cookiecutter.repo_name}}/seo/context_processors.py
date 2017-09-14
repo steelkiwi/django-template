@@ -11,9 +11,9 @@ def get_page_meta_data(request):
     Searching and returns keywords and description meta information for given urls.
     """
     if request.method != 'GET':
-        return
-    url_name = request.resolver_match.url_name if request.resolver_match else None
+        return {}
 
+    url_name = request.resolver_match.url_name if request.resolver_match else None
     if url_name:
         page_meta_data = PageMetaData.get_metadata(url=request.path)
         if page_meta_data:
