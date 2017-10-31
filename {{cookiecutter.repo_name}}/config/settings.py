@@ -134,6 +134,8 @@ EMAIL_FILE_PATH = EMAIL_URL.get('EMAIL_FILE_PATH', '')
 
 DEFAULT_FROM_EMAIL = env('DJANGO_DEFAULT_FROM_EMAIL')
 
+SERVER_EMAIL = env('DJANGO_SERVER_EMAIL')
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
